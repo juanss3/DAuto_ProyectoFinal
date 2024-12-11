@@ -1,0 +1,44 @@
+# Node.js (Backend)
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+package-lock.json
+yarn.lock
+dist/
+build/
+
+# Archivos de entorno (si no se usan en producción)
+.env
+.env.local
+.env.*.local
+.vscode/
+.idea/
+
+# Logs y temporales
+*.log
+*.bak
+*.swp
+*.swo
+.DS_Store
+
+# Dependencias de frontend (React)
+node_modules/
+build/
+
+# Configuraciones de IDEs
+.vscode/
+.idea/
+
+# Directorios de caché
+.cache/
+public/static/
+
+# Archivos de pruebas locales
+test-results/
+coverage/
+
+# Otros archivos no relevantes para el repositorio
+*.pem
+*.key
+*.crt
