@@ -24,7 +24,7 @@ const userSchema = new Schema<IUser>({
     membership: {
         type: Schema.Types.ObjectId,
         ref: 'Membership',
-        default: null // Por defecto, el usuario no tiene membresía asignada
+        default: null 
     },
 }, { timestamps: true });
 
