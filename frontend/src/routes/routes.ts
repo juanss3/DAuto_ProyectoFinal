@@ -10,7 +10,7 @@ interface Route {
 
 const routes: Route[] = [
     {path: '/', component: Home},
-    {path: '/register-user', component: RegisterUser},
+    {path: '/register', component: RegisterUser},
     {path: '/login', component: login},
 ];
 
