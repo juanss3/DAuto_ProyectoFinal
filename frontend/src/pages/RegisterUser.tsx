@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api/api";
+import api from "../utils/api";
 
 const Register = () => {
     const [name, setName] = React.useState("");
@@ -12,8 +12,11 @@ const Register = () => {
     const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
+            console.log(api)
             await api.post("/register", { name, password, email, placa });
+            
             navigate("/login");
+        
         } catch (error) {
             alert("Error al registrar el usuario");
         }

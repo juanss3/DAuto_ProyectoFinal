@@ -4,23 +4,20 @@ import userRoutes from "./routes/userRoutes";
 import carWashRoutes from "./routes/car_washRoutes";
 import carSaleRoutes from "./routes/car_saleRoutes";
 import memberRoutes from "./routes/memberRoutes";
+import adminRoutes from "./routes/adminRoutes";
 
 const app = express();
 
-// Configuración de middlewares
-    
-app.use(cors({
-    origin: "http://localhost:5002", // Cambia al dominio de tu frontend en producción
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Permitir cookies u otras credenciales
-}));
-app.use(express.json()); // Parsear JSON
+app.use(cors());
+app.use(express.json()); 
+
 
 // Rutas principales
 app.use("/api/users", userRoutes);
 app.use("/api/car_wash", carWashRoutes);
 app.use("/api/car_sale", carSaleRoutes);
 app.use("/api/member", memberRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Manejo de rutas no encontradas
 app.use((req, res, next) => {

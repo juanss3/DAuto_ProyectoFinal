@@ -14,7 +14,7 @@ const Home: React.FC = () => {
                     <h2 className="text-2xl font-bold">Car Sale</h2>
                     <p className="text-gray-600 dark:text-gray-300">Venta de coches</p>
                 </Link>
-                <Link to="/membership" className="col-span-1 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+                <Link to="/members" className="col-span-1 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
                     <h2 className="text-2xl font-bold">Membership</h2>
                     <p className="text-gray-600 dark:text-gray-300">Suscripciones</p>
                 </Link>

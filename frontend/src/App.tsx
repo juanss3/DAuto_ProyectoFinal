@@ -1,16 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Páginas
-import Login from "./pages/login";
-import RegisterUser from "./pages/RegisterUser";
-import Home from "./pages/home";
 
 // Componentes
 import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 
-// Rutas
+// Rutas de las paginas
 import routes from "./routes/routes";
 
 const App: React.FC = () => {
@@ -28,10 +24,6 @@ const App: React.FC = () => {
             />
           ))}
 
-          {/* Rutas estáticas como respaldo */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<RegisterUser />} />
-          <Route path="/home" element={<Home />} />
         </Routes>
       </div>
       <Footer />

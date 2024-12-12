@@ -15,9 +15,6 @@ const Navbar: React.FC = () => {
                         <li>
                             <Link to="/" className="block py-2 px-3 text-gray-900 rounded hover:bg-primary-600 hover:text-primary-700 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-700 dark:hover:bg-primary-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Home</Link>
                         </li>
-                        <li>
-                            <Link to="/admin" className="block py-2 px-3 text-gray-900 rounded hover:bg-primary-600 hover:text-primary-700 md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-700 dark:hover:bg-primary-700 dark:hover:text-white md:dark:hover:bg-transparent">Admin</Link>
-                        </li>
                         {localStorage.getItem("token") ? (
                             <li>
                                 <button onClick={() => localStorage.removeItem("token")} className="py-2 px-3 text-gray-900 rounded hover:bg-primary-1000 hover:text-primary-1000 md:hover:bg-transparent md:border-0 md:hover:text-primary-1000 md:p-0 dark:text-white md:dark:hover:text-primary-1000 dark:hover:bg-primary-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</button>
