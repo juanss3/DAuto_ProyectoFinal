@@ -1,131 +1,40 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Dautos Cali - Lavado de carros con membresia lavado ilimitados por el mes " />
-    <title>Dautos Cali - Lavado de Carros</title>
-
-    <!-- Icono y manifestos -->
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+        manifest.json provides metadata used when your web app is installed on a
+        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
-    <!-- Fuentes y estilos -->
-    <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-
-    <!-- Agregar otros meta tags o scripts aquí -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!--
+        Notice the use of %PUBLIC_URL% in the tags above.
+        It will be replaced with the URL of the `public` folder during the build.
+        Only files inside the `public` folder can be referenced from the HTML.
+        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+        work correctly both with client-side routing and a non-root public URL.
+        Learn how to configure a non-root public URL by running `npm run build`.
+        -->
+    <title>Dautos</title>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="%PUBLIC_URL%/logo.png" alt="Dautos Cali Logo" />
-            </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Sección principal -->
-        <section id="inicio" class="inicio">
-            <div class="hero">
-                <h1>Bienvenidos a Dautos Cali</h1>
-                <p>El mejor lavado de carros, ¡tu carro como nuevo!</p>
-                <a href="#servicios" class="cta-btn">Ver nuestros servicios</a>
-            </div>
-        </section>
-
-        <!-- Sección de servicios -->
-        <section id="servicios" class="servicios">
-            <h2>Servicios</h2>
-            <div class="servicios-container">
-                <div class="servicio">
-                    <i class="fas fa-car-wash"></i>
-                    <h3>Lavado Básico</h3>
-                    <p>Lavado exterior e interior del carro con productos de alta calidad.</p>
-                </div>
-                <div class="servicio">
-                    <i class="fas fa-spray-can"></i>
-                    <h3>Lavado Completo</h3>
-                    <p>Lavado completo, aspirado, limpieza de tapicería y más.</p>
-                </div>
-                <div class="servicio">
-                    <i class="fas fa-paint-roller"></i>
-                    <h3>Detalle de Pintura</h3>
-                    <p>Restauración de la pintura y protección contra los elementos.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección de productos -->
-        <section id="productos" class="productos">
-            <h2>Productos de Limpieza</h2>
-            <p>Ofrecemos productos exclusivos para mantener tu carro limpio por más tiempo.</p>
-            <div class="productos-container">
-                <div class="producto">
-                    <img src="%PUBLIC_URL%/producto1.jpg" alt="Producto 1" />
-                    <h3>Shampoo para Carros</h3>
-                    <p>Shampoo especial para el cuidado del auto.</p>
-                    <button>Comprar Ahora</button>
-                </div>
-                <div class="producto">
-                    <img src="%PUBLIC_URL%/producto2.jpg" alt="Producto 2" />
-                    <h3>Cera Protector</h3>
-                    <p>Cera para proteger la pintura y darle brillo.</p>
-                    <button>Comprar Ahora</button>
-                </div>
-                <div class="producto">
-                    <img src="%PUBLIC_URL%/producto3.jpg" alt="Producto 3" />
-                    <h3>Limpiador de Tapicería</h3>
-                    <p>Ideal para mantener el interior de tu vehículo impecable.</p>
-                    <button>Comprar Ahora</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección de contacto -->
-        <section id="contacto" class="contacto">
-            <h2>Contacto</h2>
-            <p>¿Tienes alguna duda o deseas agendar un servicio? ¡Contáctanos ahora!</p>
-            <form>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required />
-
-                <label for="email">Correo electrónico:</label>
-                <input type="email" id="email" name="email" required />
-
-                <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-
-                <button type="submit">Enviar mensaje</button>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <p>&copy; 2024 Dautos Cali. Todos los derechos reservados.</p>
-            <div class="social-media">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-    </footer>
-
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!--
+        This HTML file is a template.
+        If you open it directly in the browser, you will see an empty page.
+        You can add webfonts, meta tags, or analytics to this file.
+        The build step will place the bundled scripts into the <body> tag.
+        To begin the development, run `npm start` or `yarn start`.
+        To create a production bundle, use `npm run build` or `yarn build`.
+    -->
 </body>
 
 </html>

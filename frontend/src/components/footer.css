@@ -1,0 +1,31 @@
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    border-top: 3px solid #444;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    font-size: 0.9em;
+}
+
+.footer p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.footer a {
+    color: #61dafb;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #21a1f1;
+}
