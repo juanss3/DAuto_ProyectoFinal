@@ -1,18 +1,21 @@
 import { Router } from 'express';
-import { registerUserAsMember, getallMembers,  } from '../controllers/membersControllers';
+import {createMembership, getAllMemberships, getMembershipById, updateMembership, deleteMembership} from '../controllers/membersControllers';
 
 const router = Router();
 
-// Crear un nuevo miembro
-router.post('/register', registerUserAsMember);
+// Crear una nueva membresía
+router.post('/register', createMembership);
 
-// Obtener todos los miembros
-router.get('/', getallMembers);
+// Obtener todas las membresías
+router.get('/', getAllMemberships);
 
-// Obtener un miembro por ID
-router.get('/:id', getMemberById);
+// Obtener una membresía por ID
+router.get('/:id', getMembershipById);
 
-// Eliminar un miembro por ID
-router.delete('/:id', deleteMember);
+// Actualizar una membresía por ID
+router.put('/:id', updateMembership);
+
+// Eliminar una membresía por ID
+router.delete('/:id', deleteMembership);
 
 export default router;

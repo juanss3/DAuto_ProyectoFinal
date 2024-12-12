@@ -11,7 +11,7 @@ const carSaleSchema = new Schema<ICarSale>({
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     carDetails: { type: String, required: true },
     price: { type: Number, required: true },
-    dateofsale: { type: Date, required: true },
+    dateofsale: { type: Date, default: Date.now },
 }, { timestamps: true });
 
-export const CarSale = model<ICarSale>("CarSale", carSaleSchema);
+export const CarSale = model<ICarSale>("CarSale", carSaleSchema); 

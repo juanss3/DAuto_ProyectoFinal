@@ -4,7 +4,7 @@ export interface IUser extends Document {
     name: string;
     email: string;
     password: string;
-    membership: Schema.Types.ObjectId | null;
+    placa: string;
 }
 
 const userSchema = new Schema<IUser>({
@@ -21,11 +21,11 @@ const userSchema = new Schema<IUser>({
         type: String,
         required: true
     },
-    membership: {
-        type: Schema.Types.ObjectId,
-        ref: 'Membership',
-        default: null 
+    placa: {
+        type: String,
+        required: true
     },
+
 }, { timestamps: true });
 
 export const User = model<IUser>('User', userSchema);

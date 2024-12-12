@@ -1,12 +1,12 @@
- import { Router } from "express";
-import{getAllCarWashes,getCarWashById,createCarWash, deleteCarwash} from "../controllers/car_washControllers";
+import { Router } from "express";
+import {createCarWash, getAllCarWashes, getCarWashById, deleteCarWash } from "../controllers/car_washControllers";
 
 const router = Router();
 
-router.post("/create", createCarWash);
+router.post("/register", createCarWash);
 router.get("/", getAllCarWashes);
 router.get("/:id", getCarWashById);
-router.delete("/:id", deleteCarwash);
+router.delete("/:id", deleteCarWash);
 
 export default router;
 

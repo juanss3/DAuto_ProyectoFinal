@@ -1,60 +1,105 @@
-import { Request, Response } from 'express';
-import { User } from '../models/user';
-import { Membership } from '../models/members';
+import { Request, Response } from "express";
+import { Membership } from "../models/members";
 
-export const registerUserAsMember = async (req: Request, res: Response) => {
-  try {
-    const { userId, membershipId, membershipData } = req.body;
+// Crear una nueva membresía
+export const createMembership = async (req: Request, res: Response) => {
+    try {
+        const {user, type, price, duration, description } = req.body;
 
-    // Buscar usuario existente
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'Usuario no encontrado' });
+        const membership = new Membership({
+            user,
+            type,
+            price,
+            duration,
+            description,
+        });
+
+        await membership.save();
+
+        res.status(201).json({
+            message: "Membership created successfully",
+            membership,
+        });
+    }catch (error) {
+        const errorMessage = error instanceof Error ? error.message: 'An unknown error ocurred';
+        res.status(500).json({error: errorMessage});
     }
-
-    // Verificar si se proporciona un ID de membresía
-    let membership;
-    if (membershipId) {
-      membership = await Membership.findById(membershipId);
-      if (!membership) {
-        return res.status(404).json({ message: 'Membresía no encontrada' });
-      }
-    } else if (membershipData) {
-      // Crear una nueva membresía si no se proporciona un ID
-      membership = new Membership(membershipData);
-      await membership.save();
-    } else {
-      return res.status(400).json({ message: 'Debes proporcionar un ID o datos de la membresía' });
-    }
-
-    // Asignar la membresía al usuario
-    user.membership = membership._id;
-    await user.save();
-
-    res.status(200).json({
-      message: 'Usuario registrado como miembro con éxito',
-      user,
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Error al registrar al usuario como miembro', error });
-  }
 };
 
-export const getAllMembers = async (_req: Request, res: Response) => {
-  try {
-    // Buscar usuarios con una membresía asignada
-    const members = await User.find({ membership: { $ne: null } }).populate('membership');
 
-    if (!members.length) {
-      return res.status(404).json({ message: 'No se encontraron miembros' });
+// Obtener todas las membresías
+export const getAllMemberships = async (req: Request, res: Response) => {
+    try {
+        const memberships = await Membership.find().populate("user");
+        res.status(200).json(memberships);
+    }catch (error) {
+        const errorMessage = error instanceof Error ? error.message: 'An unknown error ocurred';
+        res.status(500).json({error: errorMessage});
     }
+};
+    
 
-    res.status(200).json({
-      message: 'Lista de todos los miembros',
-      members,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error al obtener los miembros', error });
+
+// Obtener una membresía por ID
+export const getMembershipById = async (req: Request, res: Response):  Promise<void> =>{
+    try {
+        const { id } = req.params;
+        const membership = await Membership.findById(id).populate("user");
+
+        if (!membership) {
+            res.status(404).json({ message: "Membership not found" });
+            return;
+        }
+
+        res.status(200).json(membership);
+    }  catch (error) {
+        const errorMessage = error instanceof Error ? error.message: 'An unknown error ocurred';
+        res.status(500).json({error: errorMessage});
+    }
+}
+
+
+// Actualizar una membresía por ID
+export const updateMembership = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id } = req.params;
+        const updates = req.body;
+
+        const membership = await Membership.findByIdAndUpdate(id, updates, {
+            new: true,
+            runValidators: true,
+        }).populate("user");
+
+        if (!membership) {
+            res.status(404).json({ message: "Membership not found" });
+            return;
+        }
+
+        res.status(200).json({
+            message: "Membership updated successfully",
+            membership,
+        });
+    }  catch (error) {
+      const errorMessage = error instanceof Error ? error.message: 'An unknown error ocurred';
+      res.status(500).json({error: errorMessage});
+  }
+}
+
+// Eliminar una membresía por ID
+export const deleteMembership = async (req: Request, res: Response):  Promise<void> => {
+    try {
+        const { id } = req.params;
+
+        const membership = await Membership.findByIdAndDelete(id);
+
+        if (!membership) {
+          res.status(404).json({ message: "Membership not found" });
+          return;
+        }
+
+        res.status(200).json({ message: "Membership deleted successfully" });
+    }  catch (error) {
+      const errorMessage = error instanceof Error ? error.message: 'An unknown error ocurred';
+      res.status(500).json({error: errorMessage});
   }
 };
