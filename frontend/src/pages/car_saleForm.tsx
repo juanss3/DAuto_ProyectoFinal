@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../utils/api'
 
 const CarSaleForm: React.FC = () => {
     const [formData, setFormData] = useState({
         nombre: '',
         carDetails: '',
         price: 0,
-        dateofsale: new Date(),
+        dateofsale: '',
+        imageUrl: ''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -20,10 +21,13 @@ const CarSaleForm: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await axios.post('/car_sale/register', formData);
-            alert('Venta de auto registrada con éxito');
+            // Asegúrate de que esta URL sea la correcta según tu servidor
+            const response = await api.post('/car_sale/register', formData);
+            console.log('Respuesta del servidor:', response);
+            alert('Auto registrado con éxito');
         } catch (error) {
-            console.error('Error al registrar la venta de auto:', error);
+            console.error('Error al registrar de auto:', error);
+            alert('Hubo un error al registrar el auto');
         }
     };
 
@@ -84,9 +88,22 @@ const CarSaleForm: React.FC = () => {
                         id="dateofsale"
                         name="dateofsale"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value={formData.dateofsale.toISOString().split('T')[0]}
+                        value={formData.dateofsale}
                         onChange={handleChange}
                         required
+                    />
+                </div>
+                <div className="mb-5">
+                    <label htmlFor="imageUrl" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        URL de la imagen:
+                    </label>
+                    <input
+                        type="text"
+                        id="imageUrl"
+                        name="imageUrl"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value={formData.imageUrl}
+                        onChange={handleChange}
                     />
                 </div>
                 <div className="flex justify-end space-x-2">
@@ -107,6 +124,7 @@ const CarSaleForm: React.FC = () => {
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};
+
 export default CarSaleForm;

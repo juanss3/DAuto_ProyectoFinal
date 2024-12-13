@@ -4,10 +4,10 @@ import { CarSale } from '../models/car_sale';
 // Registrar una nueva venta de auto
 export const createCarSale = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { nombre, carDetails, price, dateofsale } = req.body;
+        const { nombre, carDetails, price, dateofsale, imageUrl} = req.body;
 
         // Validar datos de entrada
-        if (!nombre || !carDetails || !price || !dateofsale) {
+        if (!nombre || !carDetails || !price || !dateofsale || !imageUrl) {
             res.status(400).json({ message: 'Todos los campos son obligatorios' });
             return;
         }
@@ -17,7 +17,8 @@ export const createCarSale = async (req: Request, res: Response): Promise<void> 
             nombre,
             carDetails,
             price,
-            dateofsale
+            dateofsale,
+            imageUrl
         });
 
         // Guardar en la base de datos
@@ -97,9 +98,9 @@ export const deleteCarSale = async (req: Request, res: Response): Promise<void> 
 // Actualizar una venta de auto
 export const updateCarSale = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { saleId } = req.params;
+        const { id } = req.params;
 
-        const carSale = await CarSale.findByIdAndUpdate(saleId, req.body, { new: true });
+        const carSale = await CarSale.findByIdAndUpdate(id, req.body, { new: true });
 
         if (!carSale) {
             res.status(404).json({ message: 'Venta de auto no encontrada' });

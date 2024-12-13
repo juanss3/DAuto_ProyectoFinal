@@ -44,8 +44,10 @@ const UsersList: React.FC = () => {
 
         try {
             await updateUser(selectedUser);
-            alert("Usuario actualizado con éxito");
             handleCloseModal();
+
+            // Recarga de la pagina
+            window.location.reload();
         } catch (error) {
             console.error("Error al actualizar el usuario:", error);
         }

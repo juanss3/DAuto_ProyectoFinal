@@ -15,6 +15,7 @@ const App: React.FC = () => {
       <Navbar />
       <div className="content">
         <Routes>
+          
           {/* Renderizar rutas dinámicas desde el archivo de configuración */}
           {routes.map((route, index) => (
             <Route

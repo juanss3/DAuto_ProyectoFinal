@@ -5,6 +5,7 @@ export interface ICarSale extends Document {
     carDetails: string;
     price: number;
     dateofsale: Date;
+    imageUrl: string;
 }
 
 const carSaleSchema = new Schema<ICarSale>({
@@ -12,6 +13,7 @@ const carSaleSchema = new Schema<ICarSale>({
     carDetails: { type: String, required: true },
     price: { type: Number, required: true },
     dateofsale: { type: Date, default: Date.now },
+    imageUrl: { type: String, required: true }, 
 }, { timestamps: true });
 
 export const CarSale = model<ICarSale>("CarSale", carSaleSchema); 

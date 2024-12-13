@@ -1,8 +1,8 @@
 import React from "react";
-import useFetchCarWash  from "../hooks/useFetchCarWash";
+import useFetchCarWash from "../hooks/useFetchCarWash";
 
 const CarWashList: React.FC = () => {
-    const { carWash, loading } = useFetchCarWash();
+    const { carWash, loading, handleDelete } = useFetchCarWash();
 
     if (loading) return <p>Loading car wash data...</p>;
 
@@ -18,16 +18,17 @@ const CarWashList: React.FC = () => {
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">Nombre</th>
-                            <th scope="col" className="px-6 py-3">cita</th>
-                            <th scope="col" className="px-6 py-3">Stipo de servicio</th>
-                            <th scope="col" className="px-6 py-3">precio</th>
+                            <th scope="col" className="px-6 py-3">Cita</th>
+                            <th scope="col" className="px-6 py-3">Tipo de servicio</th>
+                            <th scope="col" className="px-6 py-3">Precio</th>
                             <th scope="col" className="px-6 py-3">Descripción</th>
+                            <th scope="col" className="px-6 py-3">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {carWash.map((service, index) => (
+                        {carWash.map((service) => (
                             <tr
-                                key={index}
+                                key={service._id}
                                 className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                             >
                                 <th
@@ -42,6 +43,14 @@ const CarWashList: React.FC = () => {
                                 <td className="px-6 py-4">{service.serviceType}</td>
                                 <td className="px-6 py-4">${service.price}</td>
                                 <td className="px-6 py-4">{service.description}</td>
+                                <td className="px-6 py-4">
+                                    <button
+                                        onClick={() => handleDelete(service._id)} // Llamar a handleDelete
+                                        className="px-2 py-1 text-white bg-red-600 rounded hover:bg-red-700 text-xs"
+                                    >
+                                        Eliminar
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

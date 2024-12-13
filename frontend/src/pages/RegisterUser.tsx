@@ -17,8 +17,8 @@ const Register = () => {
         event.preventDefault();
         try {
             await api.post("/users/register", { name, email, placa, direccion, numero, membresia });
-            
-            // navigate("/register");
+            alert("Usuario registrado con éxito");
+            navigate("/register");
 
             
         
