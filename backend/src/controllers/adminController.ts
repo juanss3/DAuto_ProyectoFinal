@@ -4,12 +4,13 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { jwtConfig } from '../utils/jwtConfig';
 
-
+//Registrar Usuario
 export const registerAdmin = async (req: Request, res: Response): Promise<void> => {
     try {
         const { name, email, password } = req.body;
         
-        // Validar si ya existe un admin con el mismo correo
+        // Valida si ya existe un admin con el mismo correo, para no volverlo a registrar
+
         const existingAdmin = await admin.findOne({ email });
         if (existingAdmin) {
             res.status(400).json({ message: 'El correo ya está registrado' });
@@ -35,6 +36,8 @@ export const registerAdmin = async (req: Request, res: Response): Promise<void> 
         res.status(500).json({ error: errorMessage });
     }
 };
+
+//Login Admin
 
 export const loginAdmin = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -65,7 +68,7 @@ export const loginAdmin = async (req: Request, res: Response): Promise<void> => 
 };
 
 
-
+//Obtener todos los usuarios
 export const getAllAdmins = async (req: Request, res: Response): Promise<void> => {
     try {
         const admins = await admin.find();
@@ -77,7 +80,7 @@ export const getAllAdmins = async (req: Request, res: Response): Promise<void> =
 };
 
 
-
+//Obtener Admin por id
 export const getAdminById = async (req: Request, res: Response): Promise<void> => {
     try {
         const adminData = await admin.findById(req.params.id);
@@ -93,7 +96,7 @@ export const getAdminById = async (req: Request, res: Response): Promise<void> =
 };
 
 
-
+//Actualizar Admin por Id
 export const updateAdminById = async (req: Request, res: Response): Promise<void> => {
     try {
         const adminData = await admin.findByIdAndUpdate(
@@ -114,6 +117,7 @@ export const updateAdminById = async (req: Request, res: Response): Promise<void
     }
 };
 
+//Eliminar Admin por Id
 export const deleteAdmin = async (req: Request, res: Response): Promise<void> => {
     try {
         const adminData = await admin.findByIdAndDelete(req.params.id);

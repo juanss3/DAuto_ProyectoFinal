@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { CarSale } from '../models/car_sale';
 
-// Registrar una nueva venta de auto
+// Registrar un carro
+
 export const createCarSale = async (req: Request, res: Response): Promise<void> => {
     try {
         const { nombre, carDetails, price, dateofsale, imageUrl} = req.body;
@@ -33,7 +34,7 @@ export const createCarSale = async (req: Request, res: Response): Promise<void> 
     }
 };
 
-// Obtener todas las ventas de autos
+// Obtener todas los autos
 export const getAllCarSales = async (_req: Request, res: Response): Promise<void> => {
     try {
         const carSales = await CarSale.find() // Popula los datos del usuario
@@ -53,7 +54,7 @@ export const getAllCarSales = async (_req: Request, res: Response): Promise<void
     }
 };
 
-// Obtener ventas de autos por usuario
+// Obtener carro por id
 export const getCarSaleById = async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
@@ -74,7 +75,7 @@ export const getCarSaleById = async (req: Request, res: Response): Promise<void>
     }
 };
 
-// Eliminar una venta de auto
+// Eliminar un carro
 export const deleteCarSale = async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
@@ -95,7 +96,7 @@ export const deleteCarSale = async (req: Request, res: Response): Promise<void> 
     }
 };
 
-// Actualizar una venta de auto
+// Actualizar el carro
 export const updateCarSale = async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
