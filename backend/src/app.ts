@@ -1,14 +1,15 @@
 import express from "express";
-import cors from "cors";
 import userRoutes from "./routes/userRoutes";
 import carWashRoutes from "./routes/car_washRoutes";
 import carSaleRoutes from "./routes/car_saleRoutes";
 import memberRoutes from "./routes/memberRoutes";
 import adminRoutes from "./routes/adminRoutes";
+import middlewareAutenticacion from "./utils/authmiddleware";
 
 const app = express();
-
+const cors = require('cors');
 app.use(cors());
+
 app.use(express.json()); 
 
 
@@ -19,6 +20,16 @@ app.use("/api/car_sale", carSaleRoutes);
 app.use("/api/member", memberRoutes);
 app.use("/api/admin", adminRoutes);
 
+
+
+
+// Manejo Admin
+app.get('/api/admin/login', middlewareAutenticacion, (req, res,) => {
+    res.status(200).json({
+        mensaje: 'Perfil de usuario',
+        usuario: req.user, // Aquí accedes al usuario decodificado
+    });
+});
 // Manejo de rutas no encontradas
 app.use((req, res, next) => {
     res.status(404).json({ error: "Ruta no encontrada" });

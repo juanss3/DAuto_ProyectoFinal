@@ -1,14 +1,14 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface ICarSale extends Document {
-    user: Schema.Types.ObjectId;
+    nombre: string
     carDetails: string;
     price: number;
     dateofsale: Date;
 }
 
 const carSaleSchema = new Schema<ICarSale>({
-    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    nombre: {type: String, required: true },
     carDetails: { type: String, required: true },
     price: { type: Number, required: true },
     dateofsale: { type: Date, default: Date.now },

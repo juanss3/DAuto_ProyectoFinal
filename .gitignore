@@ -9,11 +9,7 @@ dist/
 build/
 
 # Archivos de entorno (si no se usan en producción)
-.env
-.env.local
-.env.*.local
-.vscode/
-.idea/
+
 
 # Logs y temporales
 *.log

@@ -6,15 +6,17 @@ import { CarWash } from "../models/car_wash"; // Cambia esto por la ruta correct
   // Crear un nuevo registro de lavado de autos
 export const createCarWash = async (req: Request, res: Response): Promise<void> =>{
   try {
-    const { user, date, serviceType, price, description} = req.body;
+    
+    const { name, date, serviceType, price, description} = req.body;
+    console.log(req.body);
     // Validación básica
-    if (!user || !date || !serviceType || !price) {
+    if (!name || !date || !serviceType || !price) {
       res.status(400).json({ message: "Todos los campos son obligatorios." });
       return;
     }
       // Crear nuevo documento en la base de datos
       const newCarWash = new CarWash({
-        user,
+        name,
         date,
         serviceType,
         price,
@@ -31,13 +33,13 @@ export const createCarWash = async (req: Request, res: Response): Promise<void> 
 
 
   // Obtener todos los registros de lavados de autos
-  export const getAllCarWashes = async (req: Request, res: Response):Promise<void>  =>{
+  export const getAllCarWashes = async (req: Request, res: Response): Promise<void> => {
     try {
-      const allCarWashes = await CarWash.find().populate('user');
+      const allCarWashes = await CarWash.find();
       res.status(200).json(allCarWashes);
     } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : 'An unknow error ocurred';
-        res.status(500).json({error: errorMessage});
+      const errorMessage = error instanceof Error ? error.message : 'An unknow error ocurred';
+      res.status(500).json({ error: errorMessage });
     }
   };
 
@@ -46,7 +48,7 @@ export const createCarWash = async (req: Request, res: Response): Promise<void> 
     try {
       const { id } = req.params;
 
-      const carWash = await CarWash.findById(id).populate('user');
+      const carWash = await CarWash.findById(id)
       if (!carWash) {
         res.status(404).json({ message: "Registro de lavado de autos no encontrado." });
         return;

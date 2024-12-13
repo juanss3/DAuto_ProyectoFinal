@@ -1,7 +1,8 @@
 import {Schema,model,Document} from "mongoose";
 
+
 export interface ICarWash extends Document {
-    user: Schema.Types.ObjectId;
+    name: string;
     date: Date;
     serviceType: string;
     price: string;
@@ -9,7 +10,7 @@ export interface ICarWash extends Document {
 }
 
 const carWashSchema = new Schema<ICarWash>({
-    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    name: { type: String, required: true },
     date: { type: Date, required: true },
     serviceType: { type: String, required: true, enum: ['basico', 'intermedio', 'premium', "miembro"], },
     price: { type: String, required: true, enum: ["60000", "100000", "180000", "0"], },

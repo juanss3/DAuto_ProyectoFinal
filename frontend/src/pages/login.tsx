@@ -1,28 +1,49 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from "../utils/api";
+
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Aquí puedes agregar la lógica de autenticación
-        console.log(email, password);
-        if (email === 'admin@admin.com' && password === 'password') {
-            navigate('/admin');
-        } else {
-            alert('Credenciales incorrectas');
+        setError(null); // Limpia cualquier error previo
+
+        try {
+            // Realiza la solicitud al backend
+            const response = await api.post('/admin/login', { email, password });
+
+            // Verifica si la respuesta es exitosa
+            if (response.status === 200) {
+                // Obtiene el token de la respuesta
+                const token = response.data.token;
+
+                // Guarda el token en local storage
+                localStorage.setItem('token', token);
+                
+
+                // Navega a la página de administrador si las credenciales son correctas
+                navigate('/home');
+            } else {
+                throw new Error('Credenciales incorrectas');
+            }
+        } catch (err: any) {
+            // Muestra un mensaje de error si la autenticación falla
+            setError(err.response?.data?.message || 'Ocurrió un error, por favor intenta de nuevo.');
         }
     };
+
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                     <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
-                    Flowbite
+                    
                 </a>
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

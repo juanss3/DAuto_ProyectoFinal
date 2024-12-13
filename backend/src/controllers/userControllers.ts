@@ -1,14 +1,20 @@
 import {Request, Response } from 'express';
 import {User} from '../models/user';
+import { stringify } from 'querystring';
+import mongoose from 'mongoose';
 
 export const registerUser = async (req: Request, res: Response) => {
+    console.log("perro andando");
     try {
-        const { name, email, password, placa } = req.body;
-
+        
+        const { name, email, direccion, numero , membresia, placa } = req.body;
+    console.log(req.body);
         const newUser = new User({
             name,
             email,
-            password,
+            direccion,
+            numero,
+            membresia,
             placa,
         });
 
@@ -16,6 +22,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
         res.status(201).json({ message: 'User created successfully', user: newUser });
     } catch (error) {
+        console.log(error);
         const errorMessage = error instanceof Error ? error.message: 'An unknown error ocurred';
         res.status(500).json({error: errorMessage});
     }
@@ -50,22 +57,39 @@ export const getUserById = async (req: Request, res: Response): Promise <void> =
 };
 
 
-export const updateById =  async (req: Request, res: Response): Promise <void> => {
-    try{
-        const user = await User.findByIdAndUpdate(req.params.id, 
-            req.body, 
-            {new: true, runValidators: true}
-        );
-        if(!user){
-            res.status(404).json({message: "user not found"});
-            return;
-        }
-        res.status(200).json(user)   
-    }catch (error){
-        res.status(500).json({ message: "user not updated",error});
-    }
-};
+export const updateById = async (req: Request, res: Response): Promise <void> => {
+  const { id } = req.params; // El id que viene de la URL
+  const { name, email, direccion, numero, membresia, placa } = req.body; // Los datos que se pasan en el cuerpo
 
+  // Validar si el id es un ObjectId válido de MongoDB
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: 'ID no válido' });
+    return 
+  }
+
+  try {
+    // Buscar y actualizar al usuario
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { name, email, direccion, numero, membresia, placa },
+      { new: true } // Esto asegura que se devuelva el documento actualizado
+    );
+
+    // Si no se encuentra el usuario, devolver un error
+    if (!updatedUser) {
+      res.status(404).json({ message: 'Usuario no encontrado' });
+      return 
+    }
+
+    // Si todo está bien, devolver el usuario actualizado
+    res.json(updatedUser);
+    return
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al actualizar el usuario' });
+    return
+  }
+};
 
 
 export const deleteUser = async (req: Request, res: Response): Promise<void> => { 

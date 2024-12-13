@@ -4,17 +4,17 @@ import { CarSale } from '../models/car_sale';
 // Registrar una nueva venta de auto
 export const createCarSale = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { user, carDetails, price, dateofsale } = req.body;
+        const { nombre, carDetails, price, dateofsale } = req.body;
 
         // Validar datos de entrada
-        if (!user || !carDetails || !price || !dateofsale) {
+        if (!nombre || !carDetails || !price || !dateofsale) {
             res.status(400).json({ message: 'Todos los campos son obligatorios' });
             return;
         }
 
         // Crear la nueva venta
         const carSale = new CarSale({
-            user,
+            nombre,
             carDetails,
             price,
             dateofsale
@@ -35,7 +35,7 @@ export const createCarSale = async (req: Request, res: Response): Promise<void> 
 // Obtener todas las ventas de autos
 export const getAllCarSales = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const carSales = await CarSale.find().populate('user', 'name email'); // Popula los datos del usuario
+        const carSales = await CarSale.find() // Popula los datos del usuario
 
         if (!carSales.length) {
             res.status(404).json({ message: 'No se encontraron ventas de autos' });
@@ -57,7 +57,7 @@ export const getCarSaleById = async (req: Request, res: Response): Promise<void>
     try {
         const { id } = req.params;
 
-        const carSale = await CarSale.findById(id).populate('user', 'name email');
+        const carSale = await CarSale.findById(id)
 
         if (!carSale) {
             res.status(404).json({ message: 'Venta de auto no encontrada' });
